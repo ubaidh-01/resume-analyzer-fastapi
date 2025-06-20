@@ -1,7 +1,7 @@
 from fastapi import FastAPI
 
 from app.database import create_db_and_tables
-from app.routes import auth, resumes
+from app.routes import auth, resumes, users
 
 app = FastAPI(title="Resume Analyzer API")
 
@@ -14,6 +14,7 @@ def on_startup():
 # Register routers
 app.include_router(auth.router)
 app.include_router(resumes.router)
+app.include_router(users.router)
 
 
 @app.get("/")
