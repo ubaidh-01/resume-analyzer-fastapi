@@ -9,7 +9,7 @@ from app.database import get_db
 from app.models.user import User
 from app.schemas.resume import ResumeOut
 from app.utils.analyzer import extract_text_from_pdf
-from app.utils.gpt_resume_improver import improve_resume_with_chatgpt
+from app.utils.gpt_resume_improver import improve_resume_with_ai
 from app.utils.security import get_current_user
 
 router = APIRouter(prefix="/resumes", tags=["Resumes"])
@@ -35,7 +35,7 @@ def upload_resume(
 
     saved_resume = crud_resume.create_resume(db, current_user, file.filename, content)
 
-    gpt_response = improve_resume_with_chatgpt(content)
+    gpt_response = improve_resume_with_ai(content)
 
     try:
         parsed_response = json.loads(gpt_response)
